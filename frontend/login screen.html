@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Login Screen</title>
+        <!-- Bootstrap 5 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Animate.css for additional animations -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="login-container">
+                        <form class="login-form animate__animated animate__fadeInUp" action="https://example.com/login" method="post">
+                            <h1 class="h3 mb-4 fw-normal text-center text-primary">Welcome Back</h1>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingUsername" placeholder="Username" required>
+                                <label for="floatingUsername">Username</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                                <label for="floatingPassword">Password</label>
+                            </div>
+                            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap 5 JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <script>
+            // Generate random shapes
+            function generateShapes() {
+                const shapes = ['square', 'circle', 'triangle'];
+                const container = document.querySelector('.floating-shapes');
+                
+                for (let i = 0; i < 15; i++) {
+                    const shape = document.createElement('div');
+                    const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+                    
+                    shape.classList.add('shape', randomShape);
+                    shape.style.left = `${Math.random() * 100}%`;
+                    shape.style.width = `${Math.random() * 50 + 20}px`;
+                    shape.style.height = shape.style.width;
+                    shape.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                    shape.style.animationDelay = `${Math.random() * 5}s`;
+                    
+                    if (randomShape === 'triangle') {
+                        shape.style.borderLeft = `${parseInt(shape.style.width) / 2}px solid transparent`;
+                        shape.style.borderRight = `${parseInt(shape.style.width) / 2}px solid transparent`;
+                        shape.style.borderBottom = `${shape.style.height} solid rgba(66, 133, 244, 0.1)`;
+                        shape.style.height = '0px';
+                        shape.style.width = '0px';
+                    }
+                    
+                    container.appendChild(shape);
+                }
+            }
+
+            // Input focus effects
+            const inputs = document.querySelectorAll('.form-control');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    input.classList.add('animate__animated', 'animate__pulse');
+                });
+                input.addEventListener('blur', () => {
+                    input.classList.remove('animate__animated', 'animate__pulse');
+                });
+            });
+
+            // Initialize
+            generateShapes();
+        </script>
+    </body>
+</html>

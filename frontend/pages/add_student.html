@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Voeg Student Toe{% endblock %}
+{% block page_title %}Nieuwe Student{% endblock %}
+
+{% block content %}
+<style>
+    #class_id {
+        color: white;
+        background-color: #3a3a3a;
+    }
+</style>
+    <div class="form-container-wrapper">
+        <div class="form-container">
+            <h2 class="form-title">Voeg een nieuwe student toe</h2>
+            <form action="/add_student" method="post" class="mb-4 addForm">
+                <div class="mb-3 input-group">
+                    <label for="name" class="form-label">
+                        <i class="fas fa-user"></i> Naam
+                    </label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="mb-3 input-group">
+                    <label for="class_id" class="form-label">
+                        <i class="fas fa-users"></i> Klas
+                    </label>
+                    <select class="form-control" id="class_id" name="class_id" required>
+                        {% for class in classes %}
+                        <option value="{{ class.id }}">{{ class.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-save"></i> Opslaan
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

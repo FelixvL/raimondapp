@@ -1,0 +1,394 @@
+:root {
+    --primary-color: #1e3a5f;
+    --secondary-color: #00bcd4;
+    --background-color: #060d15;
+    --text-color: #ffffff;
+    --glow-color: rgba(0, 188, 212, 0.5);
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Verdana, sans-serif;
+    overflow-x: hidden;
+}
+
+h2 {
+    color: var(--secondary-color);
+    text-shadow: 0 0 5px var(--glow-color);
+}
+
+.shadow {
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.rounded {
+    border-radius: 0.5rem;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--background-color);
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 1;
+    }
+    20% {
+        transform: scale(25, 25);
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(40, 40);
+    }
+}
+
+.btn-primary:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #00acc1;
+    border-color: #00acc1;
+}
+
+.form-control {
+    background-color: rgba(8, 8, 8, 0.1);
+    border-color: var(--secondary-color);
+    color: var(--text-color);
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-control::placeholder {
+    color: #ffffff;
+}
+
+.form-control:focus {
+    background-color: #3a3a3a;
+    color: hsl(0, 0%, 100%);
+    box-shadow: 0 0 0 0.25rem rgba(66, 133, 244, 0.25);
+}
+
+.input-group-text {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--background-color);
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+
+footer {
+    background-color: rgba(30, 58, 95, 0.2);
+    border-top: 1px solid var(--glow-color);
+    padding: 1rem 0;
+    text-align: center;
+    color: var(--text-color);
+}
+
+/* Custom Table Styles, i didnt really like the bootstrap ones */
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.table-custom thead {
+    background: linear-gradient(135deg, var(--primary-color), rgba(0, 188, 212, 0.9), var(--primary-color)); /* Enhanced gradient for header */
+    color: var(--background-color);
+    font-weight: bold;
+    box-shadow: 0 2px 45px rgba(7, 130, 179, 0.785);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.table-custom th, .table-custom td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table-custom tbody tr {
+    transition: background-color 0.4s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.table-custom tbody tr:hover {
+    background-color: rgba(0, 188, 212, 0.3);
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.terugButton {
+    position: relative;
+    padding: 6px 12px;
+    font-size: 12px;
+    max-width: 90px;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: normal;
+    display: block;
+    margin: 0 auto 22px;
+    text-align: center;
+}
+
+.terugButton:hover {
+    background-color: #2980b9;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.terugButton:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.arrow {
+    display: inline-block;
+    margin-right: 4px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    position: relative;
+    left: 0;
+}
+
+.terugButton:hover .arrow {
+    animation: popOut 0.3s ease-out forwards;
+}
+
+@keyframes popOut {
+    0% {
+        transform: translateX(0) scale(1);
+    }
+    50% {
+        transform: translateX(-6px) scale(1.2);
+    }
+    100% {
+        transform: translateX(-4px) scale(1.1);
+    }
+}
+
+/* Search form styles */
+.search-filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: -10px;
+    margin-left: -10px;
+    gap: 10px;
+}
+
+.search-item {
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-bottom: 0.5rem;
+    flex: 0 1 auto;
+}
+
+.search-item:first-child {
+    order: -1;
+    margin-right: 0.5rem;
+}
+
+.search-item select,
+.search-item input {
+    width: auto;
+    min-width: 120px;
+}
+
+@media (min-width: 768px) {
+    .search-filter-row {
+        flex-wrap: nowrap;
+    }
+    
+    .search-item {
+        margin-bottom: 0;
+    }
+}
+
+.date-range-inputs {
+    display: flex;
+    gap: 5px;
+}
+
+.date-range-inputs input {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* New styles for the dropdown */
+.form-select option {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Styles for the dropdown when it's openm i forgot that this is a thing i can specifically do */
+.form-select:focus {
+    border-color: var(--secondary-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(0, 188, 212, 0.25);
+}
+
+.form-select, .form-select:focus {
+    color: var(--text-color);
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+.table-custom {
+    margin-top: 2rem;
+}
+
+.search-filter-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.search-filter-row > div {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+@media (min-width: 576px) {
+    .search-filter-row > div {
+        width: calc(50% - 30px);
+    }
+}
+
+@media (min-width: 992px) {
+    .search-filter-row > div {
+        width: calc(25% - 30px);
+    }
+}
+
+/* The form styles area */
+.form-container-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    max-height: 100vh;
+    padding: 2rem;
+}
+
+.form-container {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px var(--glow-color);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-size: 1.8rem;
+    text-shadow: 0 0 10px var(--glow-color);
+}
+
+.addForm .form-control:focus,
+.addForm .form-select:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--text-color);
+    box-shadow: 0 0 10px var(--glow-color);
+}
+
+.addForm .form-control,
+.addForm .form-select {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+}
+
+.addForm .form-control,
+.addForm .form-select {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+}
+
+.addForm .form-control:focus,
+.addForm .form-select:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--text-color);
+    box-shadow: 0 0 10px var(--glow-color);
+}
+
+.addForm .btn-primary {
+    margin-top: 0.8rem;
+    padding: 0.6rem 0.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.date-range-inputs {
+    display: flex;
+    gap: 10px;
+}
+
+.date-range-inputs input {
+    flex: 1;
+}
+
+#was_aanwezig, #student_select, #class_select {
+    color: white;
+    background-color: rgba(42, 42, 42, 0.42);
+}

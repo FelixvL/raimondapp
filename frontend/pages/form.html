@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Toevoegen{% endblock %}
+{% block page_title %}Presentie toevoegen{% endblock %}
+
+{% block content %}
+    <div class="form-container-wrapper">
+        <div class="form-container">
+            <h2 class="form-title">Presentie toevoegen</h2>
+            <form action="/submit" method="post" class="mb-4 addForm">
+                <div class="mb-3 input-group">
+                    <label for="class_select" class="form-label">
+                        <i class="fas fa-users"></i> Klas
+                    </label>
+                    <select class="form-control" id="class_select" required>
+                        <option value="">Selecteer een klas</option>
+                        <!-- Klassen worden hier dynamisch toegevoegd -->
+                    </select>
+                </div>
+                <div class="mb-3 input-group">
+                    <label for="student_select" class="form-label">
+                        <i class="fas fa-user"></i> Student
+                    </label>
+                    <select class="form-control" id="student_select" name="student_id" required>
+                        <option value="">Selecteer een student</option>
+                        <!-- Studenten worden hier dynamisch toegevoegd -->
+                    </select>
+                </div>
+                <div class="mb-3 input-group">
+                    <label for="was_aanwezig" class="form-label">
+                        <i class="fas fa-check-circle"></i> Was Aanwezig
+                    </label>
+                    <select class="form-control" id="was_aanwezig" name="was_aanwezig" required>
+                        <option value="1">Ja</option>
+                        <option value="0">Nee</option>
+                    </select>
+                </div>
+                <div class="mb-3 input-group">
+                    <label for="datum" class="form-label">
+                        <i class="fas fa-calendar-alt"></i> Datum
+                    </label>
+                    <input type="date" class="form-control" id="datum" name="datum" required>
+                </div>
+                <div class="mb-3 input-group">
+                    <label for="reden" class="form-label">
+                        <i class="fas fa-comment"></i> Reden
+                    </label>
+                    <textarea class="form-control" id="reden" name="reden" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-save"></i> Opslaan
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const classSelect = document.getElementById('class_select');
+            const studentSelect = document.getElementById('student_select');
+
+            // Fetch classes
+            fetch('/api/classes')
+                .then(response => response.json())
+                .then(classes => {
+                    classes.forEach(klass => {
+                        const option = document.createElement('option');
+                        option.value = klass.id;
+                        option.textContent = klass.name;
+                        classSelect.appendChild(option);
+                    });
+                });
+
+            // Update students when a class is selected
+            classSelect.addEventListener('change', function() {
+                const classId = this.value;
+                studentSelect.innerHTML = '<option value="">Selecteer een student</option>'; // Reset student dropdown
+
+                if (classId) {
+                    fetch(`/api/class/${classId}/students`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.students) {
+                                data.students.forEach(student => {
+                                    const option = document.createElement('option');
+                                    option.value = student.id;
+                                    option.textContent = student.name;
+                                    studentSelect.appendChild(option);
+                                });
+                            }
+                        });
+                }
+            });
+        });
+    </script>
+{% endblock %}

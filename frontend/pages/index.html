@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aanwezigheids Beheer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/land.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand">Aanwezigheids Beheer</a>
+    </div>
+  </nav>
+
+  <div class="main-content container">
+    <div class="background-animation">
+      <div style="left: 2%; width: 80px; height: 80px; animation-delay: 0s;"></div>
+      <div style="left: 18%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s;"></div>
+      <div style="left: 33%; width: 40px; height: 40px; animation-delay: 4s;"></div>
+      <div style="left: 47%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s;"></div>
+      <div style="left: 62%; width: 20px; height: 20px; animation-delay: 0s;"></div>
+      <div style="left: 79%; width: 110px; height: 110px; animation-delay: 3s;"></div>
+      <div style="left: 93%; width: 150px; height: 150px; animation-delay: 7s;"></div>
+      <div style="left: 8%; width: 45px; height: 45px; animation-delay: 1s; animation-duration: 15s;"></div>
+      <div style="left: 25%; width: 70px; height: 70px; animation-delay: 5s; animation-duration: 20s;"></div>
+      <div style="left: 54%; width: 25px; height: 25px; animation-delay: 2.5s; animation-duration: 14s;"></div>
+      <div style="left: 71%; width: 90px; height: 90px; animation-delay: 6s; animation-duration: 22s;"></div>
+      <div style="left: 88%; width: 35px; height: 35px; animation-delay: 4.5s; animation-duration: 16s;"></div>
+    </div>
+    <div class="content-wrapper">
+      <div class="hero-section">
+        <h1 class="hero-title">Presentie Check</h1>
+        <p class="hero-subtitle">Simple & Easy</p>
+      </div>
+      
+      <div class="search-bar">
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-search"></i></span>
+          <input type="text" id="searchBar" class="form-control" placeholder="Zoek een persoon..." autocomplete="off">
+        </div>
+      </div>
+      
+      <div class="row mb-5">
+        <div class="col-md-6 mb-4">
+          <button class="btn btn-primary w-100" onclick="viewDBList()">
+            <i class="fas fa-list-alt me-2"></i>Bekijk Presentielijst
+          </button>
+        </div>
+        <div class="col-md-6 mb-4">
+          <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#classesModal">
+            <i class="fas fa-users me-2"></i>Bekijk Persoon
+          </button>
+        </div>
+        <div class="col-md-6 mb-4">
+          <button class="btn btn-primary w-100" onclick="registerIemand()">
+            <i class="fas fa-user-clock me-2"></i>Registreer Presentie
+          </button>
+        </div>
+        <div class="col-md-6 mb-4">
+          <button class="btn btn-primary w-100" onclick="window.location.href='/add_student'">
+            <i class="fas fa-user-plus me-2"></i>Voeg Student Toe
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Classes Modal -->
+  <div class="modal fade" id="classesModal" tabindex="-1" aria-labelledby="classesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="classesModalLabel">Klassen Overzicht</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group" id="classesList">
+            <!-- Klassen worden hier dynamisch toegevoegd -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='js/land.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Afwezigheidslijst{% endblock %}
+{% block page_title %}Presentielijst{% endblock %}
+
+{% block content %}
+    <form action="/search" method="get" class="mb-4">
+        <div class="search-filter-row">
+            <div class="search-item">
+                <input type="text" class="form-control" name="name" placeholder="Zoek een naam..." value="{{ request.args.get('name', '') }}">
+            </div>
+            <div class="search-item">
+                <select class="form-select" name="attendance">
+                    <option value="">Aanwezigheid</option>
+                    <option value="1" {% if request.args.get('attendance') == '1' %}selected{% endif %}>Aanwezig</option>
+                    <option value="0" {% if request.args.get('attendance') == '0' %}selected{% endif %}>Afwezig</option>
+                </select>
+            </div>
+            <div class="search-item">
+                <div class="date-range-inputs">
+                    <input type="date" class="form-control" name="start_date" placeholder="Start datum" value="{{ request.args.get('start_date', '') }}">
+                    <input type="date" class="form-control" name="end_date" placeholder="Eind datum" value="{{ request.args.get('end_date', '') }}">
+                </div>
+            </div>
+            <div class="search-item">
+                <button class="btn btn-primary w-100" type="submit">Zoeken</button>
+            </div>
+            <div class="search-item">
+                <button class="btn btn-secondary w-100" type="button" id="resetButton">Reset</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table-custom">
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Was Aanwezig</th>
+                <th>Datum</th>
+                <th>Reden</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for absence in absences %}
+            <tr>
+                <td>{{ absence.student_name }}</td>
+                <td>{{ 'Ja' if absence.was_aanwezig == 1 else 'Nee' }}</td>
+                <td>{{ absence.datum }}</td>
+                <td>{{ absence.reden or 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
