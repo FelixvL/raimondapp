@@ -12,10 +12,15 @@
                     <label for="class_select" class="form-label">
                         <i class="fas fa-users"></i> Klas
                     </label>
-                    <select class="form-control" id="class_select" required>
-                        <option value="">Selecteer een klas</option>
-                        <!-- Klassen worden hier dynamisch toegevoegd -->
-                    </select>
+                    <div class="input-group">
+                        <select class="form-control" id="class_select" required>
+                            <option value="">Selecteer een klas</option>
+                            <!-- Klassen worden hier dynamisch toegevoegd -->
+                        </select>
+                        <button type="button" class="btn btn-outline-secondary" id="add_class_button">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="mb-3 input-group">
                     <label for="student_select" class="form-label">
@@ -96,6 +101,27 @@
                                 });
                             }
                         });
+                }
+            });
+
+            // Add class button functionality
+            document.getElementById('add_class_button').addEventListener('click', function() {
+                const className = prompt("Voer de naam van de nieuwe klas in:");
+                if (className) {
+                    fetch('/add_class', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ name: className })
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            location.reload(); // Reload the page to fetch the new class
+                        } else {
+                            alert("Er is een fout opgetreden bij het toevoegen van de klas.");
+                        }
+                    });
                 }
             });
         });
