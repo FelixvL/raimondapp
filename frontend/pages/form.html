@@ -40,6 +40,13 @@
                         <i class="fas fa-calendar-alt"></i> Datum
                     </label>
                     <input type="date" class="form-control" id="datum" name="datum" required>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const datumInput = document.getElementById('datum');
+                            const today = new Date().toISOString().split('T')[0];
+                            datumInput.value = today; // set de default naar today.
+                        });
+                    </script>
                 </div>
                 <div class="mb-3 input-group">
                     <label for="reden" class="form-label">
