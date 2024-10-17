@@ -105,9 +105,9 @@ def search():
     cursor = conn.cursor(dictionary=True)
 
     query = """
-        SELECT students.name, presentie_logs.status, presentie_logs.datum, presentie_logs.reason
-        FROM presentie_logs
-        JOIN students ON presentie_logs.student_id = students.id
+        SELECT students.name, absence_info.was_aanwezig, absence_info.datum, absence_info.reden
+        FROM absence_info
+        JOIN students ON absence_info.student_id = students.id
         WHERE 1=1
     """
     params = []
@@ -116,15 +116,15 @@ def search():
         query += " AND students.name LIKE %s"
         params.append(f"%{name}%")
     if attendance:
-        query += " AND presentie_logs.status = %s"
+        query += " AND absence_info.was_aanwezig = %s"
         params.append(attendance)
     if start_date:
-        query += " AND presentie_logs.datum >= %s"
+        query += " AND absence_info.datum >= %s"
         params.append(start_date)
     if end_date:
-        query += " AND presentie_logs.datum <= %s"
+        query += " AND absence_info.datum <= %s"
         params.append(end_date)
-
+    print(query)
     cursor.execute(query, params)
     absences = cursor.fetchall()
 
