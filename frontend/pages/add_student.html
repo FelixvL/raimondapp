@@ -24,6 +24,11 @@
                     <label for="class_id" class="form-label">
                         <i class="fas fa-users"></i> Klas
                     </label>
+                    <p>
+                        <button type="button" style="transform: translateY(5px);" class="btn btn-secondary" id="add_class_button">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </p>
                     <select class="form-control" id="class_id" name="class_id" required>
                         {% for class in classes %}
                         <option value="{{ class.id }}">{{ class.name }}</option>
@@ -36,4 +41,28 @@
             </form>
         </div>
     </div>
+
+    <script>
+
+// Add class button functionality
+document.getElementById('add_class_button').addEventListener('click', function() {
+    const className = prompt("Voer de naam van de nieuwe klas in:");
+    if (className) {
+        fetch('/add_class', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: className })
+        })
+        .then(response => {
+            if (response.ok) {
+                location.reload(); // Reload the page to fetch the new class
+            } else {
+                alert("Er is een fout opgetreden bij het toevoegen van de klas.");
+            }
+        });
+    }
+});
+    </script>
 {% endblock %}
