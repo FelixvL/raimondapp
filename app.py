@@ -288,5 +288,26 @@ def update_academy_status(student_id):
 
     return jsonify({'status': 'success'})
 
+# Route for adding a new class
+@app.route('/add_class', methods=['POST'])
+def add_class():
+    data = request.get_json()
+    class_name = data.get('name')
+
+    if not class_name:
+        return "Missing class name", 400
+
+    conn = mysql.connector.connect(**db_config)
+    cursor = conn.cursor()
+
+    # Insert the new class into the database
+    cursor.execute("INSERT INTO classes (name) VALUES (%s)", (class_name,))
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
+    return jsonify({'status': 'success'}), 201
+
 if __name__ == '__main__':
     app.run(debug=True)
