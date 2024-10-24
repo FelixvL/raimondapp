@@ -108,7 +108,7 @@ def search():
         SELECT students.name, absence_info.was_aanwezig, absence_info.datum, absence_info.reden
         FROM absence_info
         JOIN students ON absence_info.student_id = students.id
-        WHERE 1=1
+        WHERE students.on_academy = TRUE
     """
     params = []
 
@@ -193,7 +193,7 @@ def get_classes():
 def get_students_by_class(class_id):
     conn = mysql.connector.connect(**db_config)
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT id, name FROM students WHERE class_id = %s", (class_id,))
+    cursor.execute("SELECT id, name FROM students WHERE class_id = %s AND on_academy = TRUE", (class_id,))
     students = cursor.fetchall()
     cursor.close()
     conn.close()

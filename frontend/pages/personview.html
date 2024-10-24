@@ -11,12 +11,12 @@
     <div class="container mt-5">
         <div style="display: flex; align-items: center;">
             <a href="{{ url_for('landing_page') }}" class="btn btn-secondary mr-3">Ga Terug</a>
-            <h1 class="mb-0">Student Profiel: {{ student.name }}</h1>
+            <h1 class="center">Student Profiel: <p>{{ student.name }}</p></h1>
         </div>
         <div class="card mt-4">
             <div class="card-body">
                 <h5 class="card-title">Persoonlijke Informatie</h5>
-                <p><strong>Naam:</strong> {{ student.name }}</p>
+                <p class="student-name"><strong>Naam:</strong> {{ student.name }}</p>
                 <p><strong>Klas:</strong> {{ student.class_name }}</p>
                 <p>
                     <strong>Is op Academy:</strong>
@@ -49,10 +49,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-
-        <div class="mt-4">
-            <a href="{{ url_for('person_view', student_id=student.id) }}">{{ student.name }}</a>
         </div>
     </div>
 

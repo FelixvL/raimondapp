@@ -8,23 +8,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
-<body class="container mt-5">
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <a class="btn btn-outline-secondary" onclick="Terug()">
-                <span class="arrow">&#8592;</span> Terug
-            </a>
-        </div>
+<body class="container-fluid">
+    <div class="row justify-content-center">
         <div class="col-md-4 text-center">
             <h2>{% block page_title %}{% endblock %}</h2>
-        </div>
-        <div class="col-md-4 text-end">
-            {% if session.get('logged_in') %}
-                <div class="d-inline-block border rounded p-2 bg-dark">
-                    <span class="me-2">{{ session.get('username') }}</span>
-                    <a href="{{ url_for('logout') }}" class="btn btn-sm btn-outline-danger">Uitloggen</a>
+            <div class="d-flex justify-content-between">
+                <div class="col-md-4">
+                    <a class="btn btn-outline-secondary" onclick="Terug()">
+                        <span class="arrow">&#8592;</span> Terug
+                    </a>
                 </div>
-            {% endif %}
+                <div class="text-end">
+                    {% if session.get('logged_in') %}
+                        <div class="border rounded p-2 bg-dark">
+                            <span class="me-2">{{ session.get('username') }}</span>
+                            <a href="{{ url_for('logout') }}" class="btn btn-sm btn-outline-danger">Uitloggen</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 
